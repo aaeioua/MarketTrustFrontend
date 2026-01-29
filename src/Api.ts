@@ -300,13 +300,14 @@ export interface LoginDto {
 
 /** Represents the data required to create a new user. */
 export interface NewUserDto {
+  /** The ID of the new user. */
+  id?: string | null;
   /** The name of the new user. */
   name?: string | null;
   /** The email of the new user. */
   email?: string | null;
   /** The JWT token for the new user. */
   token?: string | null;
-  id?: string | null;
 }
 
 export interface NtsGeometryServices {
@@ -603,6 +604,10 @@ export interface UserDto {
   location?: Point;
   /** The posts created by the user. */
   posts?: PostDto[] | null;
+  isPublicEmail?: boolean;
+  isPublicPhone?: boolean;
+  isPublicLocation?: boolean;
+  isPretrusted?: boolean;
 }
 
 export type QueryParamsType = Record<string | number, any>;

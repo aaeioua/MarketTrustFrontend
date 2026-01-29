@@ -1,5 +1,5 @@
 import { Api } from "@/Api";
-import type { LoginDto, RegisterDto } from "@/Api";
+import type { LoginDto, RegisterDto, UpdateUserDto } from "@/Api";
 
 const baseUrl = import.meta.env?.VITE_API_BASE_URL || import.meta.env?.VITE_API_BASEURL || "";
 
@@ -47,6 +47,14 @@ export const register = async (data: RegisterDto) => {
 
 export const getUserById = async (id: string) => {
   return await api.api.userDetail(id);
+}
+
+export const updateUser = async (data: UpdateUserDto) => {
+  return await api.api.userUpdate(data);
+}
+
+export const deleteUser = async () => {
+  return await api.api.userDelete();
 }
 
 export default api;

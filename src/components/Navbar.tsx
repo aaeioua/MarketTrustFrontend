@@ -35,7 +35,7 @@ export const Navbar: React.FC = () => {
             </>
           ) : (
             <div className="flex items-center gap-3">
-              <span className="text-sm">{user?.name}</span>
+              <Link to="/account" className="text-sm underline">{user?.name}</Link>
               <Button size="sm" onClick={handleLogout}>
                 Logout
               </Button>

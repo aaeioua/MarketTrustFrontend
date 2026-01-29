@@ -8,6 +8,7 @@ import { setAuthToken } from "@/lib/apiClient";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/components/theme-provider";
 import HomePage from "./pages/HomePage";
+import AccountPage from "./pages/AccountPage";
 
 /* async function apitest() {
   const api = new api({
@@ -54,6 +55,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
+              <Route path="/account" element={<AccountPage />} />
             </Routes>
           </Layout>
         </ThemeProvider>
