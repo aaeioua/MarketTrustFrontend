@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import * as apiClient from "@/lib/apiClient";
-import type { UpdateUserDto, Point } from "@/Api";
+import type { UpdateUserDto } from "@/Api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -21,12 +21,10 @@ import {
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
 
-type FormState = Omit<UpdateUserDto, "location"> & { longitude?: number; latitude?: number };
-
 const AccountPage: React.FC = () => {
   const navigate = useNavigate();
   const { token, user, logout } = useAuth();
-  const [form, setForm] = useState<FormState>({});
+  const [form, setForm] = useState<UpdateUserDto>({});
   const [submitting, setSubmitting] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [locating, setLocating] = useState(false);
@@ -58,10 +56,10 @@ const AccountPage: React.FC = () => {
     };
   }, [token, user, navigate]);
 
-  const handleChange = (key: Exclude<keyof FormState, "longitude" | "latitude">) => (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (key: keyof UpdateUserDto) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value;
     const value = raw === "" ? null : raw;
-    setForm((s) => ({ ...s, [key]: value } as FormState));
+    setForm((s) => ({ ...s, [key]: value }));
   };
 
   const handleLocationChange = (coordinate: "longitude" | "latitude") => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,21 +81,7 @@ const AccountPage: React.FC = () => {
         return;
       }
 
-      const geoLocation = isLongitudePresent && isLatitudePresent
-        ? ({ type: "Point", coordinates: [form.longitude!, form.latitude!] } as Point)
-        : undefined;
-
-      const update: UpdateUserDto = {
-        name: form.name,
-        email: form.email,
-        phone: form.phone,
-        isPublicEmail: form.isPublicEmail,
-        isPublicPhone: form.isPublicPhone,
-        isPublicLocation: form.isPublicLocation,
-        location: geoLocation
-      };
-
-      const res = await apiClient.updateUser(update);
+      const res = await apiClient.updateUser(form);
       if (res.data) {
         toast.success("Account updated");
       } else {

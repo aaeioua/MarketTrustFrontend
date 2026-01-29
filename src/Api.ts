@@ -586,7 +586,20 @@ export interface UpdateUserDto {
   phone?: string | null;
   /** The new phone visibility status of the user. */
   isPublicPhone?: boolean | null;
-  location?: Point;
+  /**
+   * The new longitude of the user's location.
+   * @format double
+   * @min -180
+   * @max 180
+   */
+  longitude?: number | null;
+  /**
+   * The new latitude of the user's location.
+   * @format double
+   * @min -90
+   * @max 90
+   */
+  latitude?: number | null;
   /** The new location visibility status of the user. */
   isPublicLocation?: boolean | null;
 }
@@ -599,15 +612,19 @@ export interface UserDto {
   name?: string | null;
   /** The email of the user. */
   email?: string | null;
+  /** Indicates whether the user's email is publicly visible. */
+  isPublicEmail?: boolean;
   /** The phone number of the user. */
   phone?: string | null;
+  /** Indicates whether the user's phone number is publicly visible. */
+  isPublicPhone?: boolean;
   location?: Point;
+  /** Indicates whether the user's location is publicly visible. */
+  isPublicLocation?: boolean;
+  /** Indicates whether the user is pre-trusted (known to be trusted). */
+  isPretrusted?: boolean;
   /** The posts created by the user. */
   posts?: PostDto[] | null;
-  isPublicEmail?: boolean;
-  isPublicPhone?: boolean;
-  isPublicLocation?: boolean;
-  isPretrusted?: boolean;
 }
 
 export type QueryParamsType = Record<string | number, any>;
