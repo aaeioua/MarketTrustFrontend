@@ -20,6 +20,9 @@ export const Navbar: React.FC = () => {
           <Link to="/" className="text-lg font-semibold">
             MarketTrust
           </Link>
+          <Link to="/posts" className="text-sm hover:underline">
+            Posts
+          </Link>
         </div>
         <div className="flex items-center gap-3">
           {!token ? (

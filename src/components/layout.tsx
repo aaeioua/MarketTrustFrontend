@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/navbar";
 import { Toaster } from "@/components/ui/sonner";
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {

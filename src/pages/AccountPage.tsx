@@ -20,6 +20,7 @@ import {
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
+import UseGeolocationButton from "@/components/use-geolocation-button";
 
 const AccountPage: React.FC = () => {
   const navigate = useNavigate();
@@ -27,7 +28,6 @@ const AccountPage: React.FC = () => {
   const [form, setForm] = useState<UpdateUserDto>({});
   const [submitting, setSubmitting] = useState(false);
   const [deleting, setDeleting] = useState(false);
-  const [locating, setLocating] = useState(false);
 
   useEffect(() => {
     if (!token) {
@@ -113,27 +113,6 @@ const AccountPage: React.FC = () => {
     }
   };
 
-  const handleUseLocation = () => {
-    if (!navigator.geolocation) {
-      toast.error("Geolocation not supported by this browser");
-      return;
-    }
-    setLocating(true);
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const { latitude, longitude } = pos.coords;
-        setForm((s) => ({ ...s, longitude, latitude }));
-        toast.success("Location set");
-        setLocating(false);
-      },
-      (err) => {
-        toast.error(err.message || "Unable to retrieve location");
-        setLocating(false);
-      },
-      { enableHighAccuracy: true, timeout: 10000 }
-    );
-  };
-
   return (
     <div className="flex justify-center items-start pt-6">
       <Card className="w-full max-w-2xl">
@@ -165,7 +144,13 @@ const AccountPage: React.FC = () => {
                   <Input placeholder="Latitude" value={form.latitude ?? ""} onChange={handleLocationChange("latitude")} />
                 </div>
                 <div className="mt-2">
-                  <Button type="button" variant="outline" onClick={handleUseLocation} disabled={locating}>{locating ? "Locating..." : "Use current location"}</Button>
+                  <UseGeolocationButton
+                    variant="outline"
+                    onLocation={(lng, lat) => setForm((s) => ({ ...s, longitude: lng, latitude: lat }))}
+                    useStored={false}
+                  >
+                    Use current location
+                  </UseGeolocationButton>
                 </div>
               </div>
 
