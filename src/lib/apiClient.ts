@@ -45,16 +45,8 @@ export const register = async (data: RegisterDto) => {
   return res;
 };
 
-export const getUserById = async (id: string) => {
-  return await api.api.userDetail(id);
-}
-
 export const updateUser = async (data: UpdateUserDto) => {
   return await api.api.userUpdate(data);
-}
-
-export const deleteUser = async () => {
-  return await api.api.userDelete();
 }
 
 export default api;

@@ -11,12 +11,20 @@ import {
   ComboboxList,
 } from "@/components/ui/combobox";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 import PostsList from "@/components/posts-list";
 import Paginator from "@/components/paginator";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import UseGeolocationButton from "@/components/use-geolocation-button";
+import { ArrowRight, ChevronDownIcon } from "lucide-react";
 
 const PAGE_SIZE = 25;
 
@@ -28,6 +36,7 @@ type PostQuery = {
   Latitude?: number;
   SearchRadius?: number;
   D?: number;
+  IsPriceAscending?: boolean;
   Page?: number;
   PageSize?: number;
 };
@@ -44,6 +53,7 @@ const PostsPage: React.FC = () => {
   const [latitude, setLatitude] = useState<string>("");
   const [searchRadius, setSearchRadius] = useState<string>("");
   const [d, setD] = useState<string>("");
+  const [priceSort, setPriceSort] = useState<string | undefined>(undefined);
   const { token } = useAuth();
   const [users, setUsers] = useState<Record<string, UserDto>>({});
 
@@ -69,6 +79,9 @@ const PostsPage: React.FC = () => {
       if (!Number.isNaN(parsedSearchRadius)) query.SearchRadius = parsedSearchRadius;
       if (typeof parsedD === "number" && !Number.isNaN(parsedD) && token) query.D = parsedD;
 
+      if (priceSort === "ascending") query.IsPriceAscending = true;
+      else if (priceSort === "descending") query.IsPriceAscending = false;
+
       const res = await api.api.postList(query);
       const data = res.data ?? [];
       setPosts(data);
@@ -90,7 +103,7 @@ const PostsPage: React.FC = () => {
     } catch {
       toast.error("Failed to load posts");
     }
-  }, [title, content, selectedCategory, page, longitude, latitude, searchRadius, d, token]);
+  }, [title, content, selectedCategory, page, longitude, latitude, searchRadius, d, priceSort, token]);
 
   const fetchCategories = async (name: string) => {
     try {
@@ -117,12 +130,16 @@ const PostsPage: React.FC = () => {
     <div className="p-6">
       <h1 className="text-2xl mb-4">Posts</h1>
 
-      <Collapsible>
-        <CollapsibleTrigger asChild>
-          <Button variant="outline">Filters</Button>
-        </CollapsibleTrigger>
-        <CollapsibleContent>
-          <form onSubmit={onSearch} className="flex flex-col gap-3 mt-3">
+      <div className="flex gap-2">
+        <Collapsible className="data-[state=open] rounded-md flex-1">
+          <CollapsibleTrigger asChild>
+            <Button variant="ghost" className="group w-full">
+              Filters
+              <ChevronDownIcon className="ml-auto group-data-[state=open]:rotate-180" />
+            </Button>
+          </CollapsibleTrigger>
+          <CollapsibleContent>
+            <form onSubmit={onSearch} className="flex flex-col gap-3 mt-3">
             <div className="flex gap-2 w-full">
               <Input className="flex-1" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
               <Input className="flex-1" placeholder="Content" value={content} onChange={(e) => setContent(e.target.value)} />
@@ -179,9 +196,21 @@ const PostsPage: React.FC = () => {
               <Input placeholder="Bias towards global ratings (0-1)" value={d} onChange={(e) => setD(e.target.value)} disabled={!token} />
               <Button type="submit">Search</Button>
             </div>
-          </form>
-        </CollapsibleContent>
-      </Collapsible>
+            </form>
+          </CollapsibleContent>
+        </Collapsible>
+
+        <Select value={priceSort ?? ""} onValueChange={(v) => setPriceSort(v === "none" ? undefined : v)}>
+          <SelectTrigger className="w-44">
+            <SelectValue placeholder="Sort by" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="none">None</SelectItem>
+            <SelectItem value="ascending">Price: Low <ArrowRight /> High</SelectItem>
+            <SelectItem value="descending">Price: High <ArrowRight /> Low</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
 
       <PostsList posts={posts} users={users} />
       <Paginator page={page} setPage={setPage} />

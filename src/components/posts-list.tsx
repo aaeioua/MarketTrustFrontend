@@ -29,10 +29,18 @@ const PostsList: React.FC<Props> = ({ posts, users }) => {
             </ItemTitle>
             <ItemDescription>{post.content}</ItemDescription>
             <div className="mt-2 text-sm text-muted-foreground grid grid-cols-2 gap-4">
-              <div>By {post.userId ? users[post.userId]?.name ?? post.userId : "?"}</div>
-              <div>Global trust: {post.globalTrust ?? "?"}</div>
-              <div>{post.price != null ? `${post.currency ?? ""} ${post.price} ` : "?"}</div>
-              <div>{post.personalTrust ? `Personal trust: ${post.personalTrust}` : null}</div>
+              <div>
+                By {post.userId ? (
+                  <Link to={`/users/${post.userId}`} className="text-sm underline">
+                    {users[post.userId]?.name ?? post.userId}
+                  </Link>
+                ) : (
+                  "?"
+                )}
+              </div>
+              <div>{post.globalTrust != null ? `Global trust: ${post.globalTrust}` : null}</div>
+              <div>{post.price != null ? `$${post.price}` : null}</div>
+              <div>{post.personalTrust != null ? `Personal trust: ${post.personalTrust}` : null}</div>
             </div>
           </ItemContent>
           <ItemActions>

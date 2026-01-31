@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
+import { Locate } from "lucide-react";
+import { Spinner } from "./ui/spinner";
 
 type Props = {
   onLocation: (longitude: number, latitude: number) => void;
@@ -49,7 +51,7 @@ export const UseGeolocationButton: React.FC<Props> = ({ onLocation, className, v
 
   return (
     <Button type="button" variant={variant} className={className} onClick={handleClick} disabled={locating}>
-      {locating ? "Locating..." : children ?? "Use geolocation"}
+      {locating ? <Spinner /> : children ?? <Locate />}
     </Button>
   );
 };

@@ -1019,6 +1019,8 @@ export class Api<
          * @max 1
          */
         D?: number;
+        /** Indicates whether to sort by price in ascending order. If false, sorts in descending order. */
+        IsPriceAscending?: boolean;
         /**
          * Page number for pagination.
          * @format int32

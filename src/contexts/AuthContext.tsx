@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import * as apiClient from "@/lib/apiClient";
+import api, * as apiClient from "@/lib/apiClient";
 import type { LoginDto, RegisterDto, UserDto } from "@/Api";
 import { toast } from "sonner";
 
@@ -26,7 +26,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const userId = localStorage.getItem("userId");
       const token = localStorage.getItem("token");
       if (userId && token) {
-        apiClient.getUserById(userId).then(res => setUser(res.data));
+        api.api.userDetail(userId).then(res => setUser(res.data));
         setToken(token);
         apiClient.setAuthToken(token);
       }
@@ -43,7 +43,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const userId = res.data.id;
       const token = res.data.token;
       if (userId && token) {
-        apiClient.getUserById(userId).then(res => setUser(res.data));
+        api.api.userDetail(userId).then(res => setUser(res.data));
         setToken(token);
         apiClient.setAuthToken(token);
 
@@ -69,7 +69,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const userId = res.data.id;
       const token = res.data.token;
       if (userId && token) {
-        apiClient.getUserById(userId).then(res => setUser(res.data));
+        api.api.userDetail(userId).then(res => setUser(res.data));
         setToken(token);
         apiClient.setAuthToken(token);
 

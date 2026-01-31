@@ -1,6 +1,14 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+  NavigationMenuLink,
+} from "@/components/ui/navigation-menu";
 import { useAuth } from "@/contexts/AuthContext";
 import { ModeToggle } from "./mode-toggle";
 
@@ -20,9 +28,23 @@ export const Navbar: React.FC = () => {
           <Link to="/" className="text-lg font-semibold">
             MarketTrust
           </Link>
-          <Link to="/posts" className="text-sm hover:underline">
-            Posts
-          </Link>
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Posts</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <div className="w-40">
+                    <NavigationMenuLink asChild>
+                      <Link to="/posts" className="text-sm hover:underline py-1">View posts</Link>
+                    </NavigationMenuLink>
+                    <NavigationMenuLink asChild>
+                      <Link to="/create-post" className="text-sm hover:underline py-1">Create a new post</Link>
+                    </NavigationMenuLink>
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
         </div>
         <div className="flex items-center gap-3">
           {!token ? (

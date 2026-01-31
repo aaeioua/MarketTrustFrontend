@@ -6,7 +6,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableCaption } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { ArrowLeftIcon } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 const PostPage: React.FC = () => {
   const { id } = useParams();
@@ -48,7 +48,7 @@ const PostPage: React.FC = () => {
     <div className="p-6">
       <div className="mb-4">
         <Button variant="ghost" asChild>
-          <Link to="/posts"><ArrowLeftIcon /> Back to posts</Link>
+          <Link to="/posts"><ArrowLeft /> Back to posts</Link>
         </Button>
       </div>
 
@@ -58,9 +58,15 @@ const PostPage: React.FC = () => {
         </CardHeader>
         <CardContent>
           <div className="mb-4 whitespace-pre-wrap">{post.content}</div>
-          <div className="grid grid-cols-1 gap-4 mb-4">
+          <div className="mb-4 space-y-1">
             <div>
-              <strong>Author:</strong> {postUser?.name ?? post.userId}
+              <strong>Author:</strong> {post.userId ? (
+                  <Link to={`/users/${post.userId}`} className="text-sm underline">
+                    {postUser?.name ?? post.userId}
+                  </Link>
+                ) : (
+                  "?"
+                )}
             </div>
             <div>
               <strong>Category:</strong> {category?.name ?? post.categoryId}
@@ -78,7 +84,7 @@ const PostPage: React.FC = () => {
               <strong>Personal trust:</strong> {post.personalTrust ?? "-"}
             </div>
             <div>
-              <strong>Price:</strong> {post.price != null ? `${post.price} ${post.currency ?? ""}` : "-"}
+              <strong>Price:</strong> {post.price != null ? `$${post.price}` : "-"}
             </div>
           </div>
 
