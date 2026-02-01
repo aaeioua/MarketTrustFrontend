@@ -208,11 +208,6 @@ export interface CreateTrustRatingDto {
    * @format double
    */
   trustValue: number;
-  /**
-   * The ID of the post associated with the trust rating.
-   * @format int32
-   */
-  postId?: number | null;
   /** An optional comment about the trust rating. */
   comment?: string | null;
 }
@@ -520,11 +515,6 @@ export interface TrustRatingDto {
    * @format date-time
    */
   createdAt?: string;
-  /**
-   * The ID of the post associated with this trust rating, if any.
-   * @format int32
-   */
-  postId?: number | null;
   /** The post associated with this trust rating, if any. */
   comment?: string | null;
 }
@@ -1276,11 +1266,6 @@ export class Api<
       query?: {
         /** The ID of the user who is giving the trust rating. */
         TrusteeId?: string;
-        /**
-         * The post ID associated with the trust rating.
-         * @format int32
-         */
-        PostId?: number;
         /**
          * The page number for pagination.
          * @format int32

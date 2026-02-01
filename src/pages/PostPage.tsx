@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import api from "@/lib/apiClient";
 import type { PostDto, UserDto, CategoryDto, PropertyValueDto } from "@/Api";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { formatPercent } from "@/lib/utils";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableCaption } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -78,13 +79,13 @@ const PostPage: React.FC = () => {
               <strong>Last updated:</strong> {post.lastUpdatedAt ? new Date(post.lastUpdatedAt).toLocaleString() : "-"}
             </div>
             <div>
-              <strong>Global trust:</strong> {post.globalTrust ?? "-"}
+              <strong>Global trust:</strong> {typeof post.globalTrust === "number" ? formatPercent(post.globalTrust) : "-"}
             </div>
             <div>
-              <strong>Personal trust:</strong> {post.personalTrust ?? "-"}
+              <strong>Personal trust:</strong> {typeof post.personalTrust === "number" ? formatPercent(post.personalTrust) : "-"}
             </div>
             <div>
-              <strong>Price:</strong> {post.price != null ? `$${post.price}` : "-"}
+              <strong>Price:</strong> {typeof post.price === "number" ? `$${post.price}` : "-"}
             </div>
           </div>
 

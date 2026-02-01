@@ -25,6 +25,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import UseGeolocationButton from "@/components/use-geolocation-button";
 import { ArrowRight, ChevronDownIcon } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 const PAGE_SIZE = 25;
 
@@ -211,8 +212,9 @@ const PostsPage: React.FC = () => {
           </SelectContent>
         </Select>
       </div>
-
+      <Separator className="my-4" />
       <PostsList posts={posts} users={users} />
+      <Separator className="my-4" />
       <Paginator page={page} setPage={setPage} />
     </div>
   );

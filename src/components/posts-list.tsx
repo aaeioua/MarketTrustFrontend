@@ -10,6 +10,7 @@ import {
   ItemActions,
 } from "@/components/ui/item";
 import { Button } from "@/components/ui/button";
+import { formatPercent } from "@/lib/utils";
 
 type Props = {
   posts: PostDto[];
@@ -18,9 +19,9 @@ type Props = {
 
 const PostsList: React.FC<Props> = ({ posts, users }) => {
   return (
-    <ItemGroup>
+    <ItemGroup className="space-y-2">
       {posts.map((post) => (
-        <Item key={post.id} className="hover:bg-muted/50">
+        <Item key={post.id} variant="outline" className="hover:bg-muted/50">
           <ItemContent>
             <ItemTitle>
               <Link to={`/posts/${post.id}`} className="font-medium text-primary hover:underline">
@@ -38,9 +39,9 @@ const PostsList: React.FC<Props> = ({ posts, users }) => {
                   "?"
                 )}
               </div>
-              <div>{post.globalTrust != null ? `Global trust: ${post.globalTrust}` : null}</div>
-              <div>{post.price != null ? `$${post.price}` : null}</div>
-              <div>{post.personalTrust != null ? `Personal trust: ${post.personalTrust}` : null}</div>
+              <div>{typeof post.globalTrust === "number" ? `Global trust: ${formatPercent(post.globalTrust)}` : null}</div>
+              <div>{typeof post.price === "number" ? `$${post.price}` : null}</div>
+              <div>{typeof post.personalTrust === "number" ? `Personal trust: ${formatPercent(post.personalTrust)}` : null}</div>
             </div>
           </ItemContent>
           <ItemActions>
