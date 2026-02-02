@@ -1264,7 +1264,7 @@ export class Api<
      */
     trustRatingList: (
       query?: {
-        /** The ID of the user who is giving the trust rating. */
+        /** The ID of the user being rated. */
         TrusteeId?: string;
         /**
          * The page number for pagination.
@@ -1380,7 +1380,7 @@ export class Api<
      *
      * @tags User
      * @name UserList
-     * @summary Gets all users based on the filteres.
+     * @summary Gets all users based on the filters.
      * @request GET:/api/User
      * @secure
      */

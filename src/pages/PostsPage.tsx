@@ -184,9 +184,9 @@ const PostsPage: React.FC = () => {
                   <ComboboxContent>
                     <ComboboxEmpty>No categories</ComboboxEmpty>
                     <ComboboxList>
-                      {(cat: CategoryDto) => (
-                        <ComboboxItem key={cat.id} value={cat}>
-                          {cat.name}
+                      {(category: CategoryDto) => (
+                        <ComboboxItem key={category.id} value={category}>
+                          {category.name}
                         </ComboboxItem>
                       )}
                     </ComboboxList>

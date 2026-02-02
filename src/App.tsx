@@ -12,6 +12,8 @@ import AccountPage from "./pages/AccountPage";
 import PostsPage from "./pages/PostsPage";
 import PostPage from "./pages/PostPage";
 import UserPage from "./pages/UserPage";
+import RatingsPage from "./pages/RatingsPage";
+import CreateRatingPage from "./pages/CreateRatingPage";
 
 function App() {
   useEffect(() => {
@@ -31,6 +33,8 @@ function App() {
               <Route path="/posts" element={<PostsPage />} />
               <Route path="/posts/:id" element={<PostPage />} />
               <Route path="/users/:id" element={<UserPage />} />
+              <Route path="/ratings" element={<RatingsPage />} />
+              <Route path="/create-rating" element={<CreateRatingPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/account" element={<AccountPage />} />

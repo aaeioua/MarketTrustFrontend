@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "@/lib/apiClient";
-import type { PostDto, UserDto, CategoryDto, PropertyValueDto } from "@/Api";
+import type { PostDto, UserDto, CategoryDto } from "@/Api";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { formatPercent } from "@/lib/utils";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableCaption } from "@/components/ui/table";
@@ -22,15 +22,15 @@ const PostPage: React.FC = () => {
       setLoading(true);
       try {
         const res = await api.api.postDetail(Number(id));
-        const post = res.data as PostDto;
+        const post = res.data;
         setPost(post);
         if (post.userId) {
           const user = await api.api.userDetail(post.userId);
-          setPostUser(user.data as UserDto);
+          setPostUser(user.data);
         }
         if (post.categoryId != null) {
           const category = await api.api.categoryDetail(post.categoryId);
-          setCategory(category.data as CategoryDto);
+          setCategory(category.data);
         }
       } catch {
         toast.error("Failed to load post");
@@ -43,7 +43,7 @@ const PostPage: React.FC = () => {
 
   if (!post) return <div className="p-6">{loading ? "Loading..." : "Post not found"}</div>;
 
-  const properties = (post.propertyValues ?? []) as PropertyValueDto[];
+  const properties = post.propertyValues ?? [];
 
   return (
     <div className="p-6">

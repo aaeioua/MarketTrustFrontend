@@ -43,6 +43,19 @@ export const Navbar: React.FC = () => {
                   </div>
                 </NavigationMenuContent>
               </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Ratings</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <div className="w-40">
+                    <NavigationMenuLink asChild>
+                      <Link to="/ratings" className="text-sm hover:underline py-1">View ratings</Link>
+                    </NavigationMenuLink>
+                    <NavigationMenuLink asChild>
+                      <Link to="/create-rating" className="text-sm hover:underline py-1">Create a new rating</Link>
+                    </NavigationMenuLink>
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
         </div>
