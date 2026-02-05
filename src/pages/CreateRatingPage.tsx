@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "@/lib/apiClient";
 import { useAuth } from "@/contexts/AuthContext";
 import type { UserDto } from "@/Api";
@@ -28,8 +28,6 @@ const CreateRatingPage: React.FC = () => {
     }
   };
 
-  if (!token) return <div>Please <Link to="/login" className="underline">login</Link> to create ratings.</div>;
-
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedUser?.id) {
@@ -50,6 +48,12 @@ const CreateRatingPage: React.FC = () => {
       toast.error("Failed to create rating");
     }
   };
+
+  useEffect(() => {
+    if (!token) navigate("/login");
+  }, [token, navigate]);
+
+  if (!token) return null;
 
   return (
     <div className="p-6 max-w-2xl">

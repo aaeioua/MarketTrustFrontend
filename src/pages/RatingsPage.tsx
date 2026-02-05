@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import type { TrustRatingDto, UpdateTrustRatingDto, UserDto } from "@/Api";
 import Paginator from "@/components/paginator";
 import { toast } from "sonner";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import RatingsList from "@/components/ratings-list";
 import RatingsSearch from "@/components/ratings-search";
 
@@ -18,6 +18,7 @@ type RatingQuery = {
 
 const RatingsPage: React.FC = () => {
   const { token } = useAuth();
+  const navigate = useNavigate();
   const [ratings, setRatings] = useState<TrustRatingDto[]>([]);
   const [page, setPage] = useState(1);
   const [selectedUser, setSelectedUser] = useState<UserDto | null>(null);
@@ -116,7 +117,11 @@ const RatingsPage: React.FC = () => {
     }
   };
 
-  if (!token) return <div>Please <Link to="/login" className="underline">login</Link> to view your ratings.</div>;
+  useEffect(() => {
+    if (!token) navigate("/login");
+  }, [token, navigate]);
+
+  if (!token) return null;
 
   return (
     <div className="p-6">

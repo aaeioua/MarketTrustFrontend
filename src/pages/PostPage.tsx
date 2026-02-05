@@ -4,12 +4,15 @@ import api from "@/lib/apiClient";
 import type { PostDto, UserDto, CategoryDto } from "@/Api";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { formatPercent } from "@/lib/utils";
-import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableCaption } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { ArrowLeft } from "lucide-react";
+import PostEditCard from "@/components/post-edit-card";
+import PostProperties from "@/components/post-properties";
+import { useAuth } from "@/contexts/AuthContext";
 
 const PostPage: React.FC = () => {
+  const { user } = useAuth();
   const { id } = useParams();
   const [post, setPost] = useState<PostDto | null>(null);
   const [postUser, setPostUser] = useState<UserDto | null>(null);
@@ -42,8 +45,6 @@ const PostPage: React.FC = () => {
   }, [id]);
 
   if (!post) return <div className="p-6">{loading ? "Loading..." : "Post not found"}</div>;
-
-  const properties = post.propertyValues ?? [];
 
   return (
     <div className="p-6">
@@ -89,24 +90,23 @@ const PostPage: React.FC = () => {
             </div>
           </div>
 
-          <h3 className="text-lg mb-2">Properties</h3>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Property</TableHead>
-                <TableHead>Value</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {properties.map((property) => (
-                <TableRow key={property.id}>
-                  <TableCell>{property.name}</TableCell>
-                  <TableCell>{property.value}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-            <TableCaption>{properties.length === 0 ? "No properties for this post." : ""}</TableCaption>
-          </Table>
+          <PostProperties post={post} onUpdatedPost={setPost} />
+
+          {user && user.id === post.userId && (
+            <div className="mt-4">
+              <PostEditCard
+                post={post}
+                onUpdatedPost={(update) => {
+                  setPost({ ...post,
+                    title: update.title,
+                    content: update.content,
+                    price: update.price,
+                    categoryId: update.categoryId ?? post.categoryId
+                  });
+                }}
+              />
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

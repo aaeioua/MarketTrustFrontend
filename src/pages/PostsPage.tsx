@@ -164,7 +164,7 @@ const PostsPage: React.FC = () => {
               <div className="w-60">
                 <Combobox
                   items={categories}
-                  itemToStringValue={(c) => c?.name ?? ""}
+                  itemToStringValue={(c) => c.name ?? ""}
                   value={selectedCategory}
                   onValueChange={setSelectedCategory}
                 >
