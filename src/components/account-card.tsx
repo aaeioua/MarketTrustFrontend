@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/contexts/auth-context";
 import type { UpdateUserDto } from "@/Api";
 import { Card, CardContent } from "@/components/ui/card";
 import { FieldGroup, FieldLabel } from "@/components/ui/field";

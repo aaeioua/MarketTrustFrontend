@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import SignupForm from "@/components/auth/SignupForm";
-import { useAuth } from "@/contexts/AuthContext";
+import SignupForm from "@/components/signup-form";
+import { useAuth } from "@/contexts/auth-context";
 import type { RegisterDto } from "@/Api";
 import { toast } from "sonner";
 

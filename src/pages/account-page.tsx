@@ -1,7 +1,7 @@
 import React from "react";
 import AccountCard from "@/components/account-card";
 import UserPostsCard from "@/components/user-posts-card";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/contexts/auth-context";
 import UserInfoCard from "@/components/user-info-card";
 
 const AccountPage: React.FC = () => {

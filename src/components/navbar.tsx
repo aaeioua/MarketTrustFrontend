@@ -9,7 +9,7 @@ import {
   NavigationMenuContent,
   NavigationMenuLink,
 } from "@/components/ui/navigation-menu";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/contexts/auth-context";
 import { ModeToggle } from "./mode-toggle";
 
 export const Navbar: React.FC = () => {

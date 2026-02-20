@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import LoginForm from "@/components/auth/LoginForm";
+import LoginForm from "@/components/login-form";
 import type { LoginDto } from "@/Api";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/contexts/auth-context";
 import { toast } from "sonner";
 
 const LoginPage: React.FC = () => {

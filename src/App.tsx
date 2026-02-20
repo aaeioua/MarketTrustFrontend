@@ -2,19 +2,19 @@ import "./index.css";
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "@/components/layout";
-import LoginPage from "@/pages/LoginPage";
-import RegisterPage from "@/pages/RegisterPage";
+import LoginPage from "@/pages/login-page";
+import RegisterPage from "@/pages/register-page";
 import { setAuthToken } from "@/lib/apiClient";
-import { AuthProvider } from "@/contexts/AuthContext";
+import { AuthProvider } from "@/contexts/auth-context";
 import { ThemeProvider } from "@/components/theme-provider";
-import HomePage from "./pages/HomePage";
-import AccountPage from "./pages/AccountPage";
-import PostsPage from "./pages/PostsPage";
-import PostPage from "./pages/PostPage";
-import UserPage from "./pages/UserPage";
-import RatingsPage from "./pages/RatingsPage";
-import CreateRatingPage from "./pages/CreateRatingPage";
-import CreatePostPage from "./pages/CreatePostPage";
+import HomePage from "./pages/home-page";
+import AccountPage from "./pages/account-page";
+import PostsPage from "./pages/posts-page";
+import PostPage from "./pages/post-page";
+import UserPage from "./pages/user-page";
+import RatingsPage from "./pages/ratings-page";
+import CreateRatingPage from "./pages/create-rating-page";
+import CreatePostPage from "./pages/create-post-page";
 
 function App() {
   useEffect(() => {

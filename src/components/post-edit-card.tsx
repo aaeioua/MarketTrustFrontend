@@ -18,7 +18,7 @@ import { toast } from "sonner";
 import type { PostDto, UpdatePostDto } from "@/Api";
 import type { CategoryDto } from "@/Api";
 import api from "@/lib/apiClient";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/contexts/auth-context";
 
 type Props = {
   post: PostDto;

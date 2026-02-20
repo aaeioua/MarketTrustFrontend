@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import type { PropertyValueDto, UpdatePropertyValueDto, AddPropertyValueDto, PostDto } from "@/Api";
 import api from "@/lib/apiClient";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/contexts/auth-context";
 
 type Props = {
   post: PostDto;

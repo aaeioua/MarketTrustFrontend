@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import api from "@/lib/apiClient";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/contexts/auth-context";
 import type { TrustRatingDto, UpdateTrustRatingDto, UserDto } from "@/Api";
 import Paginator from "@/components/paginator";
 import { toast } from "sonner";

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "@/lib/apiClient";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/contexts/auth-context";
 import type { UserDto } from "@/Api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

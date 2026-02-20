@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { ArrowLeft } from "lucide-react";
 import PostEditCard from "@/components/post-edit-card";
 import PostProperties from "@/components/post-properties";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/contexts/auth-context";
 
 const PostPage: React.FC = () => {
   const { user } = useAuth();
